@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .contentBai7{
+        height: 400px;
+        width: 600px;
+        border: 1px solid black;
+     }
+    .boMe{
+        margin: 7px;
+     }
+    .box{
+        margin: 3px;
+    }
+  </style>
+</head>
+<body>
+    <input class="input1" type="text" placeholder="Nhập công việc">
+    <button class="them">Thêm</button>
+    <div class="contentBai7">
+    </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+         $('.them').click(() =>{
+            var duLieu = $('.input1').val()
+            $('.contentBai7').append(`
+            <div class="boMe">
+                <div name="box" class="box">${duLieu}</div>
+                <button
+           onclick="fixContent.call(this)">Sửa</button>
+                <button onclick="delete1.call(this)">Xóa</button>   
+            </div>
+            `);
+        });
+
+        function fixContent() {
+            var noiDung = $(this).siblings().html()
+            $(this).siblings()[1].remove();
+            $(this).siblings().replaceWith('<input class = "suaNoiDungInput" type="text"> ');
+            $('.suaNoiDungInput').val(noiDung);
+            $(this).replaceWith('<button class="hoanThanh" onclick="done.call(this)">Done</button>');
+        }
+
+        function done() {
+           var noiDungMoi = $(this).siblings().val();
+            console.log(noiDungMoi);
+            $(this).siblings().replaceWith(`
+            <div class"boMe">
+                <div name="box" class="box">${noiDungMoi}</div>
+                <button  onclick="fixContent.call(this)">Sửa</button>
+                <button  onclick="delete1.call(this)">Xóa</button>    
+            </div>
+            `);
+            $(this).remove()
+        }
+
+        function delete1() {
+            $(this).parent().remove();
+        }
+        
+    </script>
+</body>
+</html>
